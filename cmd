@@ -99,6 +99,9 @@ config_arg() {
   local config_dir="${LOCAL_CONFIG_DIR}/${service}"
   if [[ -d "${config_dir}" ]]; then
     printf '%s' "--spring.config.additional-location=file:${config_dir}/"
+    if [[ -f "${config_dir}/logback.xml" ]]; then
+      printf ' %s' "--logging.config=file:${config_dir}/logback.xml"
+    fi
   fi
 }
 
@@ -154,6 +157,7 @@ cd "${ROOT_DIR}"
 rm -rf "${ROOT_DIR}/${service}/target/classes/db/migration"
 rm -f "${ROOT_DIR}/${service}/target/${service}.jar"
 mvn -pl "${service}" -am -DskipTests package
+cd "${LOCAL_DIR}"
 exec "${JAVA_BIN}" \${JAVA_OPTS:-} -jar "${ROOT_DIR}/${service}/target/${service}.jar" ${spring_config_arg}
 EOF
   chmod +x "${run_file}"
@@ -195,7 +199,7 @@ local_start() {
     fi
     ensure_local_config "${service}"
     run_file="$(write_run_script "${service}")"
-    log_file="${LOG_DIR}/${service}.log"
+    log_file="${LOG_DIR}/${service}.out.log"
     : >"${log_file}"
     log "starting ${service}; log=${log_file}"
     nohup "${run_file}" >"${log_file}" 2>&1 </dev/null &

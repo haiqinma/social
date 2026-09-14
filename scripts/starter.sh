@@ -75,11 +75,14 @@ start_service() {
     return 0
   fi
 
-  local log_file="${LOG_DIR}/${name}.log"
+  local log_file="${LOG_DIR}/${name}.out.log"
   local config_dir="${ROOT_DIR}/config/${name}"
   local config_arg=()
   if [[ -d "${config_dir}" ]]; then
     config_arg=("--spring.config.additional-location=file:${config_dir}/")
+    if [[ -f "${config_dir}/logback.xml" ]]; then
+      config_arg+=("--logging.config=file:${config_dir}/logback.xml")
+    fi
   fi
   log "starting ${name} ..."
   # JAVA_OPTS intentionally supports the conventional space-separated JVM option string.
