@@ -43,7 +43,8 @@
   --yeying-font-size-smaller: var(--el-font-size-extra-small);
   --yeying-font-size-large: var(--el-font-size-medium);
   --yeying-font-size-larger: var(--el-font-size-large);
-  --yeying-font-family: var(--el-font-family);
+  // 与 Vue 2 保持一致：Element Plus 默认字体不含中文字形，显式指定 Microsoft YaHei
+  --yeying-font-family: Microsoft YaHei, 'Avenir', Helvetica, Arial, sans-serif;
 
 
   // 边框颜色
@@ -53,7 +54,8 @@
   --yeying-box-shadow: var(--el-box-shadow);
   --yeying-box-shadow-light: var(--el-box-shadow-light);
   --yeying-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, .12);
-  --yeying-box-shadow-dark: var(--el-box-shadow-dark);
+  // 与 Vue 2 保持一致：使用自定义的多层阴影，弹窗/卡片更有层次感
+  --yeying-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .08), 0px 12px 32px rgba(0, 0, 0, .12), 0px 8px 16px -8px rgba(0, 0, 0, .16);
 
   // 背景色
   --yeying-background: white;
@@ -70,6 +72,7 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
+  font-family: var(--yeying-font-family);
 }
 
 section {

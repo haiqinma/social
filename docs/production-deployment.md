@@ -60,6 +60,8 @@ social-vX.Y.Z-<commit>/
 
 `scripts/starter.sh` starts only the backend Java services. It does not start MySQL, Redis, MinIO, Nginx, or any frontend static file server.
 
+Runtime logs are kept under `logs/`. The startup script writes process stdout/stderr to `logs/<service>.out.log`; services with an external `logback.xml` write application rolling logs to `logs/<service>.log`.
+
 ## Backend Configuration Loading
 
 Each service is started with its own external configuration directory:

@@ -7,7 +7,7 @@
 								<el-icon><Search /></el-icon>
 							</template>
 						</el-input>
-					<el-button plain class="add-btn" title="创建群聊" @click="onCreateGroup()">
+					<el-button plain circle class="add-btn" title="创建群聊" @click="onCreateGroup()">
 						<el-icon><Plus /></el-icon>
 					</el-button>
 				</div>
@@ -369,12 +369,11 @@ export default {
 		background: #ffffff;
 
 		.add-btn {
-			width: 32px;
+			flex-shrink: 0;
 			height: 32px;
 			padding: 0 !important;
 			margin: 0;
 			font-size: 16px;
-			border-radius: 50%;
 		}
 	}
 
