@@ -145,7 +145,7 @@
 
 ## `config_backup.sh`
 
-用于备份当前版本配置。脚本会读取 `scripts/backup.conf`，将当前模块目录下的 `config/` 目录和 `/etc/nginx/conf.d/social.conf` 打包，并使用 GPG 对称加密输出到 `/opt/backup`。
+用于备份当前版本配置。脚本会读取 `/data/<module>/backup.conf`，将当前模块目录下的 `config/` 目录和 `/etc/nginx/conf.d/social.conf` 打包，并使用 GPG 对称加密输出到 `/opt/backup`。
 
 ### 用法
 
@@ -155,8 +155,8 @@
 
 ### 配置文件
 
-- `scripts/backup.conf`：由 `scripts/backup.conf.template` 复制并按需修改。
-- `scripts/.passphrase-file`：由 `scripts/.passphrase-file.template` 复制，并将内容替换为 GPG 加密口令。
+- `/data/<module>/backup.conf`：由 `scripts/backup.conf.template` 复制并按需修改。
+- `/data/<module>/.passphrase-file`：由 `scripts/.passphrase-file.template` 复制，并将内容替换为 GPG 加密口令。
 
 ### 主要行为
 
@@ -203,7 +203,7 @@
 
 ## `backup.conf.template`
 
-`config_backup.sh` 的配置模板。使用前复制为 `scripts/backup.conf`。
+`config_backup.sh` 的配置模板。使用前复制为 `/data/<module>/backup.conf`。
 
 ### 配置项
 
@@ -215,6 +215,6 @@
 
 ## `.passphrase-file.template`
 
-`config_backup.sh` 的 GPG 对称加密口令模板。使用前复制为 `scripts/.passphrase-file`，并将模板内容替换为实际加密口令。
+`config_backup.sh` 的 GPG 对称加密口令模板。使用前复制为 `/data/<module>/.passphrase-file`，并将模板内容替换为实际加密口令。
 
 该文件应按敏感配置管理，避免提交实际口令到代码仓库。
